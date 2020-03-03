@@ -1,0 +1,23 @@
+
+<%=form_for @question do |f|%>
+<%=f.label :question_title %>
+<%=f.text_field :question_title %>
+<br/>
+
+<%=f.label :question_text %>
+<%=f.text_field :question_text %>
+<br/>
+
+<%=f.label :type %>
+<%=f.text_field :type %>
+<br/>
+
+<%=f.label :image_url %>
+<%=f.text_field :image_url %>
+<br/>
+
+<%=f.collection_select :quiz_id , @quizzes , :id , :title%>
+<%=f.submit "New question"%>
+
+<%end%>
+

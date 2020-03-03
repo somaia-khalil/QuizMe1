@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 User.destroy_all
 Quiz.destroy_all
-require 'rest-client'
+
 
 30.times do 
     User.create({
@@ -19,17 +19,34 @@ require 'rest-client'
 
 
 
-  response = RestClient.get("https://opentdb.com/api.php?amount=20&difficulty=easy")
+#   response = RestClient.get("https://opentdb.com/api.php?amount=20&difficulty=easy")
 
-  quizzes = JSON.parse(response)
+#   quizzes = JSON.parse(response)
   
-  quizzes["items"].each do |quiz|
+#   quizzes["items"].each do |quiz|
       
-      quiz.create(title: quiz["results"]["category"], description: quiz["results"]["type"])
-  end
-  binding.pry
-  0
+#       quiz.create(title: quiz["results"]["category"], description: quiz["results"]["type"])
+#   end
+#   binding.pry
+#   0
 
+response = HTTParty.get("https://opentdb.com/api.php?amount=20&difficulty=easy")
+
+   response["results"].each do |q| # for each quize in response
+    # create the new quiz in the database
+    quiz = Quiz.create(title: q["category"], description: q["difficulty"]) 
+    question = Question.create(quiz_id: quiz.id , question_text: q["question"], question_title: "question") 
+
+       Answer.create(question_id: question.id, answer_text: q["correct_answer"], correct: true)
+       q["incorrect_answers"].each do |i|
+       Answer.create(question_id: question.id, answer_text: i, correct: false)
+       end
+    end
+   
+# binding.pry 
+0
+    
+    
 
 
   
