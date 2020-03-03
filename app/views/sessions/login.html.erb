@@ -1,0 +1,11 @@
+
+<%= form_for @user, url: login_path, method: :post do |f| %>
+  <%= f.label :nick_name %>
+  <%= f.text_field :nick_name %>
+
+  <%= f.label :password %>
+  <%= f.password_field :password %>
+
+  <button><%= f.submit "Login" %></button>
+  Or <%= link_to(controller: 'users', action: 'new') { 'sign up' } %>
+<% end %>
