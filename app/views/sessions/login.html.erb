@@ -3,9 +3,9 @@
   <%= f.label :nick_name %>
   <%= f.text_field :nick_name %>
 
-  <%= f.label :password_digest %>
-  <%= f.password_field :password_digest %>
+  <%= f.label :password %>
+  <%= f.password_field :password %>
 
-  <button><%= f.submit "log in" %></button>
+  <button><%= f.submit "Login" %></button>
   Or <%= link_to(controller: 'users', action: 'new') { 'sign up' } %>
 <% end %>

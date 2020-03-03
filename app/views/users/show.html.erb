@@ -1,2 +1,13 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<h1>WELCOME!</P>
+
+<p> Hi <%= @user.nick_name %>!</p> 
+<br/>
+<% @user.participants.each do |participant| %>
+<%= link_to participant.quiz, quiz_path(participant.quiz) %>
+
+<% end %>
+
+
+<%= form_with url:'/logout', method: 'delete' do |f| %>
+<%= f.submit 'logout' %>
+<% end %>

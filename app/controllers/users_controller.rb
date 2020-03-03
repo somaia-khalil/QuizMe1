@@ -2,13 +2,29 @@ class UsersController < ApplicationController
 
   
   def index
+    @users = User.all
   end
 
   def new
+    @user = User.new 
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.find(session[:user_id])
+  end
+
+  def create
+    @user = User.new(user_params)
+
+      if @user.valid?
+        @user.save
+        redirect_to @user
+      else
+        redirect_to new_user_path
+
+      end
+
+
   end
 
   def edit
@@ -17,7 +33,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :nick_name, :password_digest)
+    params.require(:user).permit(:email, :nick_name, :password)
   end
 
 end
