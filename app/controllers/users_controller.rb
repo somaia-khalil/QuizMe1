@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-
+  skip_before_action :authenticated, only: [:new, :create]
   
   def index
     @users = User.all
@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(session[:user_id])
+        @user = User.find(params[:id])
   end
 
   def create
@@ -21,10 +21,7 @@ class UsersController < ApplicationController
         redirect_to @user
       else
         redirect_to new_user_path
-
       end
-
-
   end
 
   def edit
@@ -33,7 +30,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :nick_name, :password)
+    params.require(:user).permit(:email, :nick_name, :password , :password_confirmation)
   end
 
 end

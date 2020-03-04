@@ -1,0 +1,10 @@
+
+<%= form_with model:@user do |f|%>
+<%= f.label :nick_name%>
+<%= f.text_field :nick_name%>
+<%= f.label :password%>
+<%= f.password_field :password%>
+<%= f.label :password_confirmation%>
+<%= f.password_field :password_confirmation%>
+<%= f.submit%>
+<% end %>

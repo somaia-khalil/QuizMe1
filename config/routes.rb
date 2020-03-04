@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+
   resources :users 
   resources :participants
   resources :quizzes
@@ -6,10 +8,16 @@ Rails.application.routes.draw do
   resources :answers 
   resources :results 
 
+  get '/' => 'quizzes#index'
+
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
-  post '/signup' => 'users#create'
-  post '/logout' => 'sessions#destroy'
   
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  
+  get '/signup' => 'users#new'
+  post '/signup' => 'users#create'
+  
+
+  delete '/logout' => 'sessions#destroy'
+
 end
