@@ -32,16 +32,18 @@ class QuizzesController < ApplicationController
   end
 
 
-  def create 
-    @quiz = Quiz.new
-    if @quiz.valid?
-      @quiz.save
+  def create
+    @quiz = Quiz.new(quiz_params)
+    if @quiz.save
+      @quiz.assign_teacher_role(current_user)
       redirect_to quiz_path(@quiz)
     else 
       flash[:errors] = @quiz.errors.full_messages
       redirect_to new_quiz_path
     end 
   end 
+
+
 
   def edit
     @quiz = Quiz.find(params[:id])
@@ -57,6 +59,6 @@ class QuizzesController < ApplicationController
   end 
 
   def quiz_params
-    params.require(:quiz).permit(:title , :description ,:question_id , answer_ids: [])
+    params.require(:quiz).permit(:title , :description ,:question_ids)
   end 
 end
