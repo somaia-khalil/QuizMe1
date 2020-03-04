@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   resources :answers 
   resources :results 
 
+  get '/' => 'quizzes#index'
+
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   

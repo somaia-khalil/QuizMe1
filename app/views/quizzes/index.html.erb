@@ -1,7 +1,31 @@
-<h1>Quizzes#index</h1>
+
+  <section id="courses" class="section-padding">
+    <div class="container">
+      <div class="row">
+        <div class="header-section text-center">
+          <h2>Quizzes</h2>
+          <hr class="bottom-line">
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        
 <%@quizzes.each do |quiz|%>
-<ul>
-<li><%=link_to quiz.title, quiz_path(quiz)%></li>
-</ul>
+<div class="col-md-4 col-sm-6 padleft-right">
+          <figure class="imghvr-fold-up">
+            <img src="img/course02.jpg" class="img-responsive">
+            <figcaption>
+              <h3><%= quiz.title %></h3>
+              <p><%= quiz.description %></p>
+            </figcaption>
+            <a href=<%= quiz_path(quiz) %>></a>
+          </figure>
+        </div>
 <%end%>
+
+      </div>
+    </div>
+  </section>
+
 
