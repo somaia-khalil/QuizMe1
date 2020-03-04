@@ -1,10 +1,10 @@
-<h1>Quiz</h1>
-The quiz detail page goes here
-<%=@quiz.title%>
+<h1>Quiz - Teacher Page</h1>
+
+<h2><%=@quiz.title%></h2>
 
 
 
-<%@questions.each do |question|%>
+<%@quiz.questions.each do |question|%>
 <p><%=question.question_text%></p>
 <% result = Result.new %>
 <% result.participant = @participant %>

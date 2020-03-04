@@ -1,34 +1,36 @@
 class QuizzesController < ApplicationController
-  skip_before_action :authenticated, only: [:index , :new, :create]
+  skip_before_action :authenticated, only: [:index]
+ 
   def index
-    
-    user = current_user
-    if user 
-      @quizzes = user.quizzes
-    else
-      @quizzes = Quiz.all
-    end
+    @quizzes = Quiz.all
   end
+
+
 
   def new
     @questions = Question.all
     @quiz = Quiz.new
   end
 
+
+
   def show
+
     @quiz = Quiz.find(params[:id])
-    @user = current_user 
+
     if @quiz.teacher?(current_user)
-      render 'show'
-    elsif @quiz.student?(current_user)
-      @questions = @quiz.questions
+      render 'teacher_show'
     else
-       @quiz.participate(current_user)
-       render 'show'
+      # first visit? enroll as a student
+      if !@quiz.student?(current_user)
+        @quiz.participate(current_user)
+      end
+      @participant = @quiz.participant(current_user)
+      render 'student_show'
     end
-    @participant = @quiz.participant(current_user)
 
   end
+
 
   def create 
     @quiz = Quiz.new
