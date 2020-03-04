@@ -27,6 +27,10 @@ class Quiz < ApplicationRecord
        Participant.create(quiz_id: self.id, user_id: user.id, role: "student")
    end
 
+   def participant(user)
+    self.participants.find_by(user_id: user.id)
+  end
+
 
 
 end

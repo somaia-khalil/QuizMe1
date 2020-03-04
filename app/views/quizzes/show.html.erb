@@ -4,4 +4,24 @@ The quiz detail page goes here
 
 
 
+<%@questions.each do |question|%>
+<p><%=question.question_text%></p>
+<% result = Result.new %>
+<% result.participant = @participant %>
+<% result.question = question %>
+
+<%=form_for result do |f|%>
+<%=f.collection_select :answer_id , question.answers, :id, :answer_text%>
+<%=f.text_field :participant_id%>
+<%=f.text_field :question_id%>
+<%=f.submit "Next"%>
+
+<%end%>
+<%end%>
+
+
+
+
+
+
 

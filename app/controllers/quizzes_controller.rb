@@ -1,7 +1,13 @@
 class QuizzesController < ApplicationController
   skip_before_action :authenticated, only: [:index , :new, :create]
   def index
-    @quizzes = Quiz.all
+    
+    user = current_user
+    if user 
+      @quizzes = user.quizzes
+    else
+      @quizzes = Quiz.all
+    end
   end
 
   def new
@@ -15,11 +21,13 @@ class QuizzesController < ApplicationController
     if @quiz.teacher?(current_user)
       render 'show'
     elsif @quiz.student?(current_user)
-      render 'show'
+      @questions = @quiz.questions
     else
        @quiz.participate(current_user)
        render 'show'
     end
+    @participant = @quiz.participant(current_user)
+
   end
 
   def create 
@@ -47,6 +55,6 @@ class QuizzesController < ApplicationController
   end 
 
   def quiz_params
-    params.require(:quiz).permit(:title , :description ,question_ids: []  )
+    params.require(:quiz).permit(:title , :description ,:question_id , answer_ids: [])
   end 
 end
