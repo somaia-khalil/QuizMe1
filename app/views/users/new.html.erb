@@ -1,19 +1,2 @@
-<h1>Sign Up</h1>
-<p>Create a User to participate</p>
-
-
-
-
-<%= form_with url: '/login', method: :post do |f| %>
-  <%= f.label :nick_name %>
-  <%= f.text_field :nick_name %>
-  <br/>
-  <%= f.label :email %>
-  <%= f.text_field :email %>
-  <br/>
- <%= f.label :password %>
- <%= f.password_field :password %>
-
-  <%= f.submit "Sign up" %>
-  Or <%= link_to @user, user_path %>
-<% end %>
+<h1>Sign up</h1>
+<%=render "form"%>

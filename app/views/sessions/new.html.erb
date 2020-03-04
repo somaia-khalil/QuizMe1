@@ -1,12 +1,16 @@
 <h1>Sign In User</h1>
 
+<h1>Sign In</h1>
 
-<%= form_with  url:'/login' do |f| %>
+<%= form_with  url: "/login", method: :post do |f| %>
   <%= f.label :nick_name %>
   <%= f.text_field :nick_name %>
+  <br/>
+  <br/>
 
   <%= f.label :password %>
   <%= f.password_field :password %>
-
-  <%= f.submit "Login" %>
+  <br/>
+  <br/>
+  <%= f.submit "Sign in" %>
 <% end %>
