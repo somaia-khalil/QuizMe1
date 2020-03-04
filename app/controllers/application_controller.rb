@@ -7,6 +7,11 @@ class ApplicationController < ActionController::Base
            @user = User.find(session[:user_id])
         end
     end
+    
+    
+    def logged_in?
+        !!current_user
+    end
 
 
    def index
@@ -20,4 +25,8 @@ class ApplicationController < ActionController::Base
     def authenticated
         redirect_to login_path unless logged_in?
     end
+
+
+    
+
 end
