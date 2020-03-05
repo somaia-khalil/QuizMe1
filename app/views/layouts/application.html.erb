@@ -41,10 +41,10 @@
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav navbar-right">
           <li><a href="/quizzes">Show Quizzes</a></li>
-          <%if session[:user_id]%> 
-          <li><a href="#feature">Features</a></li>
+          <%if session[:nick_name] && session[:user_id] %> 
           <li><a href="/quizzes/new">Create Quiz</a></li>
           <li><a href="/logout">Logout</a></li>
+          <li><a href="/"><p>Hi <%=session[:nick_name]%>!</p></a></li>
           <%else %>
           <li><a href="#" data-target="#login" data-toggle="modal">Login</a></li>
           <li><a href="#" data-target="#signup" data-toggle="modal">Signup</a></li>
