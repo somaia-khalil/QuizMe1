@@ -46,12 +46,14 @@ class Quiz < ApplicationRecord
   def next_question(user)
      # hopefully finds the first question that is unanswered / nil if none found
      user_participant = participant(user)
-     user_questions   = user_participant.results.where(question_id: self.questions)
-     last_question_id = !user_questions.empty? ? user_questions.last.id : -1
-     outstanding_questions = self.questions.where("id > ?" , last_question_id)
-     if !outstanding_questions.empty?
-      outstanding_questions.first
-     else
+     remaining_ids = self.question_ids - user_participant.results.pluck(:question_id)
+
+    #  user_questions   = user_participant.results.where(question_id: self.questions)
+    #  last_question_id = !user_questions.empty? ? user_questions.last.id : -1
+    #  outstanding_questions = self.questions.where("id > ?" , last_question_id)
+      if !remaining_ids.empty?
+        Question.find(remaining_ids.first)
+      else
        nil
      end
   end
