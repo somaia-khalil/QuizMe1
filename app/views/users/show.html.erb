@@ -1,13 +1,17 @@
 <h1>WELCOME!</h1>
 
-<p> Hi <%= @user.nick_name %>!</p> 
+<h3><p> Hi <%= @user.nick_name %>!</p> </h3>
 <br/>
 <% @user.participants.each do |participant| %>
-<%= link_to participant.quiz, quiz_path(participant.quiz) %>
-
+<ul>
+<li>
+<%= link_to participant.quiz.title, quiz_path(participant.quiz) %>
+</li>
+</ul>
 <% end %>
 
 
+<br/>
 <%= form_with url:'/logout', method: 'delete' do |f| %>
 <%= f.submit 'logout' %>
 <% end %>

@@ -1,4 +1,6 @@
 
+
+  
   <section id="courses" class="section-padding">
     <div class="container">
       <div class="row">
@@ -14,7 +16,7 @@
 <%@quizzes.each do |quiz|%>
 <div class="col-md-4 col-sm-6 padleft-right">
           <figure class="imghvr-fold-up">
-            <img src="img/course02.jpg" class="img-responsive">
+            <img src="img/thumbnails/<%=quiz.image_url%>" class="img-responsive">
             <figcaption>
               <h3><%= quiz.title %></h3>
               <p><%= quiz.description %></p>

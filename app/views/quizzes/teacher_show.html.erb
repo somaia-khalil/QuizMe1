@@ -1,0 +1,77 @@
+<h1>Quiz - Teacher Page</h1>
+
+<h2><%=@quiz.title%></h2>
+
+<%flash.each do |key, value| %>
+  <div class="alert alert-<%= key %>"><%= value %></div>
+<% end %>
+
+
+<% @quiz.questions.each do |question|  %>
+
+<%=form_for question do |f|%>
+<%=f.hidden_field :quiz_id %>
+<p><%=f.label :question_title %><br><%=f.text_field :question_title %></p>
+<p><%=f.label :question_text %><br><%=f.text_field :question_text %></p>
+<%=f.submit "Edit Question"%>
+<%end%>
+
+
+<br><br>
+<%question.answers.each do |answer| %>
+
+<%=form_for answer do |f|%>
+<%=f.hidden_field :question_id %>
+<p><%=f.label :answer_text %><br><%=f.text_field  :answer_text  %></p>
+<p><%=f.label :points%><br><%=f.text_field :points %></p>
+<p><%=f.label :correct%><br><%radio_button("answer", "correct", "yes")%>
+<%radio_button("answer", "correct", "no")%></p>
+<%=f.submit "Edit Answer"%>
+<%end%>
+
+<%end%>
+<%answer =Answer.new(question_id: question.id) %>
+<%=form_for answer do |f|%>
+<%=f.hidden_field :question_id %>
+<p><%=f.label :answer_text %><br><%=f.text_field  :answer_text  %></p>
+<p><%=f.label :points%><br><%=f.text_field :points %></p>
+<p><%=f.label :correct%><br><%radio_button("answer", "correct", "yes")%>
+<%radio_button("answer", "correct", "no")%></p>
+<%=f.submit "create Answer"%>
+<%end%>
+
+
+<%end%>
+
+
+<% question = Question.new(quiz_id: @quiz.id) %>
+<%=form_for question do |f|%>
+<%=f.hidden_field :quiz_id %>
+<p><%=f.label :question_title %><br><%=f.text_field :question_title %></p>
+<p><%=f.label :question_text %><br><%=f.text_field :question_text %></p>
+<%=f.submit "Create Question"%>
+<%end%>
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<% @participants.each do |participant|%>
+<p><%= participant.user.nick_name %></p>
+
+<%end%>
+
+
+
+
+
+
+
+
+
