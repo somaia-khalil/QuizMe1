@@ -11,26 +11,27 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @question = Question.new
-    if @question.valid?
-      @question.save
-      redirect_to new_question_path
+    @question = Question.new(question_params)
+    if @question.save
+      redirect_to request.referrer
     else 
       flash[:errors] = @question.errors.full_messages
-      redirect_to new_question_path
-    end 
-  end 
+      redirect_to request.referrer
+    end
+  end
+
   def edit
     @quizzes = Quiz.all
     @question = Question.find(params[:id])
   end
 
   def update
-    if @question.update
-      redirect_to new_question_path
+    @question = Question.find(params[:id])
+    if @question.update(question_params)
+      redirect_to request.referrer
     else 
       flash[:errors] = @question.errors.full_messages
-      redirect_to new_qustion_path
+      redirect_to request.referrer
     end 
   end 
 

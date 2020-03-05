@@ -14,6 +14,8 @@ class QuizzesController < ApplicationController
 
 
   def teacher_show
+    @participants = @quiz.participants
+    
     render 'teacher_show'
   end 
 

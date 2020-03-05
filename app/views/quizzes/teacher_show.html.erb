@@ -2,22 +2,48 @@
 
 <h2><%=@quiz.title%></h2>
 
+<%flash.each do |key, value| %>
+  <div class="alert alert-<%= key %>"><%= value %></div>
+<% end %>
 
 
-<%@quiz.questions.each do |question|%>
-<p><%=question.question_text%></p>
-<% result = Result.new %>
-<% result.participant = @participant %>
-<% result.question = question %>
+<% @quiz.questions.each do |question|  %>
 
-<%=form_for result do |f|%>
-<%=f.collection_select :answer_id , question.answers, :id, :answer_text%>
-<%=f.text_field :participant_id%>
-<%=f.text_field :question_id%>
-<%=f.submit "Next"%>
+<%=form_for question do |f|%>
+<%=f.hidden_field :quiz_id %>
+<p><%=f.label :question_title %><br><%=f.text_field :question_title %></p>
+<p><%=f.label :question_text %><br><%=f.text_field :question_text %></p>
+<%=f.submit "Edit Question"%>
+<%end%>
+<br><br>
 
 <%end%>
+
+
+<% question = Question.new(quiz_id: @quiz.id) %>
+<%=form_for question do |f|%>
+<%=f.hidden_field :quiz_id %>
+<p><%=f.label :question_title %><br><%=f.text_field :question_title %></p>
+<p><%=f.label :question_text %><br><%=f.text_field :question_text %></p>
+<%=f.submit "Create Question"%>
 <%end%>
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<% @participants.each do |participant|%>
+<p><%= participant.user.nick_name %></p>
+
+<%end%>
+
+
 
 
 
