@@ -10,6 +10,7 @@ class SessionsController < ApplicationController
     user = user.try(:authenticate, params[:user][:password])
     if user
       session[:user_id] = user.id
+      session[:nick_name] = user.nick_name
       redirect_to quizzes_path
     else 
       redirect_to '/login'
