@@ -50,7 +50,7 @@ class Quiz < ApplicationRecord
      last_question_id = !user_questions.empty? ? user_questions.last.id : -1
      outstanding_questions = self.questions.where("id > ?" , last_question_id)
      if !outstanding_questions.empty?
-      outstanding_questions.last
+      outstanding_questions.first
      else
        nil
      end
