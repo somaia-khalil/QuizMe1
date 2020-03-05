@@ -1,8 +1,7 @@
 <h1>Sign In User</h1>
 
-<h1>Sign In</h1>
 
-<%= form_with  url: "/login", method: :post do |f| %>
+<%= form_with model: @user , url: "/login", method: :post do |f| %>
   <%= f.label :nick_name %>
   <%= f.text_field :nick_name %>
   <br/>
@@ -13,4 +12,5 @@
   <br/>
   <br/>
   <%= f.submit "Sign in" %>
+
 <% end %>

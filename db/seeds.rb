@@ -34,7 +34,7 @@ response = HTTParty.get("https://opentdb.com/api.php?amount=20&difficulty=easy")
 
    response["results"].each do |q| # for each quize in response
     # create the new quiz in the database
-    quiz = Quiz.create(title: q["category"], description: q["difficulty"]) 
+    quiz = Quiz.create(title: q["category"], description: q["difficulty"] , image_url: "course05.jpg") 
     question = Question.create(quiz_id: quiz.id , question_text: q["question"], question_title: "question") 
 
        Answer.create(question_id: question.id, answer_text: q["correct_answer"], correct: true)

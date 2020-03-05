@@ -12,17 +12,19 @@ class ResultsController < ApplicationController
   end
 
   def create
-    @result = Result.new
-    if @result.valid
+    @result = Result.new(result_params)
+    if @result.valid?
       @result.save
       redirect_to new_result_path 
     else 
-
+      # byebug
+    end
   end
 
   private 
-
   def result_params
     params.require(:result).permit(:id, :participant_id, :answer_id, :question_id)
   end
+
+
 end
