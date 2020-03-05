@@ -11,10 +11,10 @@
 
 <%=form_for question do |f|%>
 <%=f.hidden_field :quiz_id %>
-<p><%=f.label :question_title %><br><%=f.text_field :question_title %></p>
+<h2><%=f.label :question_title %><br><%=f.text_field :question_title %></h2>
 <p><%=f.label :question_text %><br><%=f.text_field :question_text %></p>
 <%=f.submit "Edit Question"%>
-<%end%>
+<%end%>  
 
 
 <br><br>
@@ -24,8 +24,7 @@
 <%=f.hidden_field :question_id %>
 <p><%=f.label :answer_text %><br><%=f.text_field  :answer_text  %></p>
 <p><%=f.label :points%><br><%=f.text_field :points %></p>
-<p><%=f.label :correct%><br><%radio_button("answer", "correct", "yes")%>
-<%radio_button("answer", "correct", "no")%></p>
+<p><%=f.label :correct%><br><%=f.check_box :correct%></p>
 <%=f.submit "Edit Answer"%>
 <%end%>
 
@@ -35,12 +34,9 @@
 <%=f.hidden_field :question_id %>
 <p><%=f.label :answer_text %><br><%=f.text_field  :answer_text  %></p>
 <p><%=f.label :points%><br><%=f.text_field :points %></p>
-<p><%=f.label :correct%><br><%radio_button("answer", "correct", "yes")%>
-<%radio_button("answer", "correct", "no")%></p>
+<p><%=f.label :correct%><br><%=f.check_box :correct%></p>
 <%=f.submit "create Answer"%>
 <%end%>
-
-
 <%end%>
 
 

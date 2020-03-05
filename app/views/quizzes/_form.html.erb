@@ -8,23 +8,36 @@
 
 
 <%=form_for @quiz do |f|%>
-<p><%=f.label :title %></p>
+<h3><%=f.label :title  %> : write a quiz title </h3>
 <%=f.text_field :title %>
 
 <br><br>
 
-<p><%=f.label :description %></p>
+<h3><%=f.label :description %> : write a quiz descreption</h3>
 <%=f.text_area :description %>
 
 <br><br>
 
-<%= f.file_field :thumbnail %>
+<h3> <%=f.label :thumbnail %> :upload a thumbnail picture</h3>
+<p><%= f.file_field :thumbnail %></p>
 
 <br><br>
+<input type="submit" name="Create Quiz" style="box-shadow: -1px 0px 5px 8px #9fb4f2;
+	background:linear-gradient(to bottom, #7892c2 5%, #476e9e 100%);
+	background-color:#7892c2;
+	border-radius:28px;
+	border:3px solid #4e6096;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:19px;
+	padding:21px 76px;
+	text-decoration:none;
+	text-shadow:-2px 1px 0px #283966;"/>
 
-<%=f.submit "Create Quizz"%>
 
-<!--- <%=f.collection_check_boxes :question_ids , @questions , :id , :question_title%> --!>
+<!--- <%=f.collection_check_boxes :question_ids , @questions , :id , :question_title%> -->
 <%end%>
 
 
