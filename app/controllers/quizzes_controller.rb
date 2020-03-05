@@ -13,20 +13,29 @@ class QuizzesController < ApplicationController
   end
 
 
+  def teacher_show
+    render 'teacher_show'
+  end 
+
+  def student_show
+    @participant = @quiz.participant(current_user)
+    @user = current_user
+    render 'student_show'
+  end
+
 
   def show
 
     @quiz = Quiz.find(params[:id])
 
     if @quiz.teacher?(current_user)
-      render 'teacher_show'
+      teacher_show
     else
       # first visit? enroll as a student
       if !@quiz.student?(current_user)
         @quiz.participate(current_user)
       end
-      @participant = @quiz.participant(current_user)
-      render 'student_show'
+      student_show
     end
 
   end

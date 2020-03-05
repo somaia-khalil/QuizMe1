@@ -4,8 +4,16 @@
 
 
 
-<%@quiz.questions.each do |question|%>
-<p><%=question.question_text%></p>
+
+<% question = @quiz.next_question(@user) %>
+<% if question %>
+<%= question.question_text %>
+
+
+<br>
+<br>
+<br>
+
 <% result = Result.new %>
 <% result.participant = @participant %>
 <% result.question = question %>
@@ -17,6 +25,7 @@
 <%=f.submit "Next"%>
 
 <%end%>
+
 <%end%>
 
 
