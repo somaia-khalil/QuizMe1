@@ -15,7 +15,31 @@
 <p><%=f.label :question_text %><br><%=f.text_field :question_text %></p>
 <%=f.submit "Edit Question"%>
 <%end%>
+
+
 <br><br>
+<%question.answers.each do |answer| %>
+
+<%=form_for answer do |f|%>
+<%=f.hidden_field :question_id %>
+<p><%=f.label :answer_text %><br><%=f.text_field  :answer_text  %></p>
+<p><%=f.label :points%><br><%=f.text_field :points %></p>
+<p><%=f.label :correct%><br><%radio_button("answer", "correct", "yes")%>
+<%radio_button("answer", "correct", "no")%></p>
+<%=f.submit "Edit Answer"%>
+<%end%>
+
+<%end%>
+<%answer =Answer.new(question_id: question.id) %>
+<%=form_for answer do |f|%>
+<%=f.hidden_field :question_id %>
+<p><%=f.label :answer_text %><br><%=f.text_field  :answer_text  %></p>
+<p><%=f.label :points%><br><%=f.text_field :points %></p>
+<p><%=f.label :correct%><br><%radio_button("answer", "correct", "yes")%>
+<%radio_button("answer", "correct", "no")%></p>
+<%=f.submit "create Answer"%>
+<%end%>
+
 
 <%end%>
 
