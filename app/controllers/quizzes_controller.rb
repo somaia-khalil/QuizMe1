@@ -44,8 +44,14 @@ class QuizzesController < ApplicationController
 
 
   def create
+
+    thumbnail = params[:quiz][:thumbnail]
     @quiz = Quiz.new(quiz_params)
-    if @quiz.save
+    @quiz.image_url = thumbnail.original_filename
+    if thumbnail && @quiz.save
+      File.open(Rails.root.join('public', 'img/thumbnails', thumbnail.original_filename), 'wb') do |file|
+        file.write(thumbnail.read)
+      end
       @quiz.assign_teacher_role(current_user)
       redirect_to quiz_path(@quiz)
     else 

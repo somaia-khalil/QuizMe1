@@ -44,7 +44,7 @@ class Quiz < ApplicationRecord
   end
 
   def next_question(user)
-     # hopefully finds the first question taht is unanswered / nil if none found
+     # hopefully finds the first question that is unanswered / nil if none found
      user_participant = participant(user)
      user_questions   = user_participant.results.where(question_id: self.questions)
      last_question_id = !user_questions.empty? ? user_questions.last.id : -1
