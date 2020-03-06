@@ -1,14 +1,11 @@
-<h1><%=@quiz.title%> - Student Result Page</h1>
 
 <br>
 <br>
 
-You scored: <%= Result.quiz_score(@participant, @quiz) %> Points!
-
+<%= @participant.user.nick_name %> scored <%= Result.quiz_score(@participant, @quiz) %> Points!
 
 <br>
 <br>
-
 
 
 <%Result.quiz_results(@participant, @quiz).each do |result| %>

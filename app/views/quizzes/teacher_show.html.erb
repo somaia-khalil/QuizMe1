@@ -2,72 +2,69 @@
 <br>
 <br>
 
-<h1><%=@quiz.title%> - Teacher Page</h1>
-
-<br>
+<h1>Teacher Page - <%=@quiz.title%></h1>
 
 <%flash.each do |key, value| %>
   <div class="alert alert-<%= key %>"><%= value %></div>
 <% end %>
 
 
-
-
-<% @quiz.questions.each do |question| %>
-      <% @question = question %>
-      <%= render "questions/form" %>
 <br>
 <br>
 <br>
-<%end%>
-
-
-
-<br>
-<br>
-<br>
-
-
-<% @question = Question.new(quiz_id: @quiz.id) %>
-<%= render "questions/form" %>
-
-
-
-
-
 
 <!--
 
-<div id="accordion">
 <% @quiz.questions.each do |question| %>
-  <div class="card">
-    <div class="card-header" id="#headingQuestion<%=question.id%>">
-      <h5 class="mb-0">
-        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseQuestion<%=question.id%>" aria-expanded="true" aria-controls="collapseQuestion<%=question.id%>">
-          <%= question.question_title %>
-        </button>
-      </h5>
-    </div>
-
-    <div id="collapseQuestion<%=question.id%>" class="collapse show" aria-labelledby="#collapseQuestion<%=question.id%>" data-parent="#accordion">
-      <div class="card-body">
       <% @question = question %>
       <%= render "questions/form" %>
-      </div>
-    </div>
-  </div>
+
 <%end%>
-</div>
+
+<% @question = Question.new(quiz_id: @quiz.id) %>
+<%= render "questions/form" %>
 
 -->
 
 
 
+<h2>Edit Quiz</h2>
 
+<div class="panel-group" id="questionAccordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
 
+    <% @quiz.questions.each do |question| %>
+    <div class="panel-heading" role="tab" id="questionHeading<%=question.id%>">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#questionAccordion" href="#questionCollapse<%=question.id%>" aria-expanded="false" aria-controls="questionCollapse<%=question.id%>">
+          <%=question.question_title%>
+        </a>
+      </h4>
+    </div>
+    <div id="questionCollapse<%=question.id%>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="questionHeading<%=question.id%>">
+      <div class="panel-body">
+      <% @question = question %>
+      <%= render "questions/form" %>
+      </div>
+    </div>
+    <%end%>
 
+    <div class="panel-heading" role="tab" id="questionHeadingNew">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#questionAccordion" href="#questionCollapseNew" aria-expanded="false" aria-controls="questionCollapseNew">
+          New Question
+        </a>
+      </h4>
+    </div>
+    <div id="questionCollapseNew" class="panel-collapse collapse" role="tabpanel" aria-labelledby="questionHeadingNew">
+      <div class="panel-body">
+      <% @question = Question.new(quiz_id: @quiz.id) %>
+      <%= render "questions/form" %>
+      </div>
+    </div>
 
-
+  </div>
+</div>
 
 
 
@@ -76,10 +73,45 @@
 <br>
 <br>
 <br>
+
+
+
+
+
+
+<h2>Show Results</h2>
+
+<div class="panel-group" id="studentsAccordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <% @quiz.participants.each do |student| %>
+    <div class="panel-heading" role="tab" id="studentHeading<%=student.id%>">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#studentAccordion" href="#studentCollapse<%=student.id%>" aria-expanded="false" aria-controls="studentCollapse<%=student.id%>">
+          <%=student.user.nick_name%>
+        </a>
+      </h4>
+    </div>
+    <div id="studentCollapse<%=student.id%>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="studentHeading<%=student.id%>">
+      <div class="panel-body">
+      <% @participant = student %>
+      <%= render 'stats' %>
+      </div>
+    </div>
+    <%end%>
+  </div>
+</div>
+
+
+
+
+
 <br>
 <br>
 <br>
-<br>
+
+
+
+<!--
 
 
 <% @participants.each do |participant|%>
@@ -87,6 +119,8 @@
 
 <%end%>
 
+
+-->
 
 
 

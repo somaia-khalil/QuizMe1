@@ -9,16 +9,53 @@
 
 <br>
 
-<%@question.answers.each do |answer| %>
-  <% @answer = answer %>
-  <%= render 'answers/form' %>
-<%end%>
 
-<br>
 
-<% if @question.id %>
-<% @answer = Answer.new(question_id: @question.id) %>
-<%= render 'answers/form' %>
-<%end%>
+
+
+<div class="panel-group" id="question<%=@question.id%>Accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+
+    <% @question.answers.each do |answer| %>
+    <div class="panel-heading" role="tab" id="question<%=@question.id%>Heading<%=answer.id%>">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#question<%=@question.id%>Accordion" href="#question<%=@question.id%>Collapse<%=answer.id%>" aria-expanded="false" aria-controls="question<%=@question.id%>Collapse<%=answer.id%>">
+          <%=answer.answer_text%>
+        </a>
+      </h4>
+    </div>
+    <div id="question<%=@question.id%>Collapse<%=answer.id%>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="question<%=@question.id%>Heading<%=answer.id%>">
+      <div class="panel-body">
+      <% @answer = answer %>
+      <%= render "answers/form" %>
+      </div>
+    </div>
+    <%end%>
+
+    <div class="panel-heading" role="tab" id="question<%=@question.id%>HeadingNew">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#question<%=@question.id%>Accordion" href="#question<%=@question.id%>CollapseNew" aria-expanded="false" aria-controls="question<%=@question.id%>CollapseNew">
+          New Answer
+        </a>
+      </h4>
+    </div>
+    <div id="question<%=@question.id%>CollapseNew" class="panel-collapse collapse" role="tabpanel" aria-labelledby="question<%=@question.id%>HeadingNew">
+      <div class="panel-body">
+      <% @answer = Answer.new(question_id: @question.id, points: 0) %>
+      <%= render "answers/form" %>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
 
 
