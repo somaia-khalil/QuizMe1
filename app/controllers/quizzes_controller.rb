@@ -6,7 +6,6 @@ class QuizzesController < ApplicationController
   end
 
 
-
   def new
     @questions = Question.all
     @quiz = Quiz.new
