@@ -15,6 +15,7 @@ class ResultsController < ApplicationController
 
   def create
     @result = Result.new(result_params)
+    # TODO get participant from current_user and not from user's form input!
     if @result.save
       redirect_to request.referrer 
     else 

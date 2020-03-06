@@ -6,11 +6,7 @@
 
 <br>
 
-<% result = Result.new %>
-<% result.participant = @quiz.participant(@current_user) %>
-<% result.question = @question %>
-
-<%=form_for result do |f|%>
+<%=form_for Result.new(participant: @quiz.participant(@current_user), question: @question) do |f|%>
 <p><%=f.collection_select :answer_id , @question.answers, :id, :answer_text%></p>
 <%=f.hidden_field :participant_id%>
 <%=f.hidden_field :question_id%>
