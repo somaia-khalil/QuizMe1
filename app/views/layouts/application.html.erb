@@ -49,7 +49,7 @@
           <li><a href="/results">Show Results</a></li>
           <li><a href="/quizzes/new">Create Quiz</a></li>
           <li><a href="/logout">Logout</a></li>
-          <li><a href="/users">Hi <%=@current_user.nick_name%>!</a></li>
+          <li><a href= <%=user_path(@current_user)%>>   Hi <%=@current_user.nick_name%>!</a></li>
           <%else %>
           <li><a href="#" data-target="#login" data-toggle="modal">Login</a></li>
           <li><a href="#" data-target="#signup" data-toggle="modal">Signup</a></li>
