@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
 
-  resources :users 
+  resources :users
   resources :participants
   resources :quizzes
   resources :questions 

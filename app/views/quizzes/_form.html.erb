@@ -1,5 +1,4 @@
-
-
+<br>
 
 <%flash.each do |key, value| %>
   <div class="alert alert-<%= key %>"><%= value %></div>
@@ -8,24 +7,28 @@
 
 
 <%=form_for @quiz do |f|%>
-<p><%=f.label :title %></p>
-<%=f.text_field :title %>
-
-<br><br>
-
-<p><%=f.label :description %></p>
-<%=f.text_area :description %>
-
-<br><br>
-
-<%= f.file_field :thumbnail %>
-
-<br><br>
-
-<%=f.submit "Create Quizz"%>
-
-<!--- <%=f.collection_check_boxes :question_ids , @questions , :id , :question_title%> --!>
+<%=f.text_field :title , class: 'form-control', placeholder: 'Enter your quiz title'%>
+<br>
+<%=f.text_field :description , class: 'form-control', placeholder: 'Enter your quiz description'%>
+<br>
+<div class="file-field">
+  <div class="d-flex justify-content-center">
+  <div class="btn btn-mdb-color btn-rounded float-left">
+  <%= f.file_field :thumbnail %>
+  </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-xs-12">
+  <button type="submit" class="btn btn-green btn-block btn-flat">Create Quiz</button>
+  </div>
+</div>
 <%end%>
+
+<br>
+<br>
+<br>
 
 
 

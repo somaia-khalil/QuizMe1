@@ -58,9 +58,10 @@ class Quiz < ApplicationRecord
      end
   end
 
-
-
-
+  def self.all_user_quizzes(user)
+    # all quizzes the user partizipated
+    self.where(participants: user.participants)
+  end
 
 
 end

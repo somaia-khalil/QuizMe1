@@ -1,6 +1,7 @@
 class ResultsController < ApplicationController
+
   def index
-    @results = Result.all
+    @quizzes = Quiz.all_user_quizzes(current_user)
   end
 
   def new
@@ -8,20 +9,21 @@ class ResultsController < ApplicationController
   end
 
   def show
+   
     @result = Result.find(params[:id])
   end
 
   def create
     @result = Result.new(result_params)
-    # byebug
-    if @result.valid?
-      @result.save
+    # TODO get participant from current_user and not from user's form input!
+    if @result.save
       redirect_to request.referrer 
     else 
     end
   end
 
-  private 
+  private
+
   def result_params
     params.require(:result).permit( :participant_id, :answer_id, :question_id)
   end

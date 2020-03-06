@@ -6,7 +6,6 @@ class QuizzesController < ApplicationController
   end
 
 
-
   def new
     @questions = Question.all
     @quiz = Quiz.new
@@ -22,12 +21,16 @@ class QuizzesController < ApplicationController
   def student_show
     @participant = @quiz.participant(current_user)
     @user = current_user
-    render 'student_show'
+    @question = @quiz.next_question(current_user)
+    if @question
+      render 'student_show'
+    else
+      render 'student_result'
+    end
   end
 
 
   def show
-
     @quiz = Quiz.find(params[:id])
 
     if @quiz.teacher?(current_user)
@@ -47,15 +50,16 @@ class QuizzesController < ApplicationController
 
     thumbnail = params[:quiz][:thumbnail]
     @quiz = Quiz.new(quiz_params)
-    @quiz.image_url = thumbnail.original_filename
     if thumbnail && @quiz.save
-      File.open(Rails.root.join('public', 'img/thumbnails', thumbnail.original_filename), 'wb') do |file|
+      @quiz.image_url = @quiz.id.to_s  # write additional image url attribute for further flexibility
+      File.open(Rails.root.join('public', 'img/thumbnails', @quiz.image_url), 'wb') do |file|
         file.write(thumbnail.read)
       end
+      @quiz.save
       @quiz.assign_teacher_role(current_user)
       redirect_to quiz_path(@quiz)
     else 
-      flash[:errors] = @quiz.errors.full_messages
+      flash[:errors] = @quiz.errors.full_messages + (!thumbnail ? ["Please provide a thumbnail"] : [])
       redirect_to new_quiz_path
     end 
   end 

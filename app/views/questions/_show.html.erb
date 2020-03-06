@@ -1,0 +1,21 @@
+<br>
+
+<h2><%=@question.question_title%></h2>
+<br>
+<h3><%=@question.question_text%></h3>
+
+<br>
+
+<%=form_for Result.new(participant: @quiz.participant(@current_user), question: @question) do |f|%>
+<p><%=f.collection_select :answer_id , @question.answers, :id, :answer_text%></p>
+<%=f.hidden_field :participant_id%>
+<%=f.hidden_field :question_id%>
+<%=f.submit 'Next', class: 'btn btn-green btn-block btn-flat'%>
+
+<%end%>
+
+
+
+<br>
+<br>
+<br>

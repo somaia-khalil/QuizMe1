@@ -1,0 +1,32 @@
+<br>
+<br>
+<h1><%=@quiz.title%> - Student Result Page</h1>
+
+<br>
+
+<h2>You scored: <%= Result.quiz_score(@participant, @quiz) %> Points!</h2>
+
+
+<br>
+
+
+<%Result.quiz_results(@participant, @quiz).each do |result| %>
+
+<p>
+<h3><%=result.question.question_text %></h3>
+<%=result.answer.correct ? "Right: #{result.answer.answer_text}" : "Wrong: #{result.answer.answer_text}"%>
+</p>
+<br>
+<%end%>
+
+<br>
+<br>
+
+
+
+
+
+
+
+
+
