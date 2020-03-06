@@ -1,7 +1,11 @@
 <br><br><br>
 <h1>Results</h1>
+<h2>Select quiz to see your result: </h2>
+
 
 <% @quizzes.each do |result| %>
-<%= result.title %>
+
+<h3><li><%= link_to  result.title , quiz_path(result) %></li> </h3>
 <% end %>
+
 <br><br><br>
