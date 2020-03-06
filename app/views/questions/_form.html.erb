@@ -1,23 +1,24 @@
 
 <%=form_for @question do |f|%>
-<%=f.label :question_title %>
-<%=f.text_field :question_title %>
-<br/>
-
-<%=f.label :question_text %>
-<%=f.text_field :question_text %>
-<br/>
-
-<%=f.label :type %>
-<%=f.text_field :type %>
-<br/>
-
-<%=f.label :image_url %>
-<%=f.text_field :image_url %>
-<br/>
-
-<%=f.collection_select :quiz_id , @quizzes , :id , :title%>
-<%=f.submit "New question"%>
-
+<%=f.hidden_field :quiz_id %>
+<p><%=f.label :question_title %><br><%=f.text_field :question_title, class: 'form-control', placeholder: 'Enter your question title'%></p>
+<p><%=f.label :question_text %><br><%=f.text_field :question_text, class: 'form-control', placeholder: 'Enter your question'%></p>
+<%=f.submit 'Save', class: 'btn btn-green btn-block btn-flat'%>
 <%end%>
+
+
+<br>
+
+<%@question.answers.each do |answer| %>
+  <% @answer = answer %>
+  <%= render 'answers/form' %>
+<%end%>
+
+<br>
+
+<% if @question.id %>
+<% @answer = Answer.new(question_id: @question.id) %>
+<%= render 'answers/form' %>
+<%end%>
+
 

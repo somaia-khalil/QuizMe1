@@ -1,0 +1,25 @@
+
+<h1><%=@question.question_text%></h1>
+<br>
+<p><%=@question.question_text%></p>
+
+<br>
+<br>
+
+<% result = Result.new %>
+<% result.participant = @quiz.participant(@current_user) %>
+<% result.question = @question %>
+
+<%=form_for result do |f|%>
+<%=f.collection_select :answer_id , @question.answers, :id, :answer_text%>
+<%=f.hidden_field :participant_id%>
+<%=f.hidden_field :question_id%>
+<%=f.submit "Next"%>
+
+<%end%>
+
+
+
+<br>
+<br>
+<br>

@@ -1,52 +1,76 @@
-<h1>Quiz - Teacher Page</h1>
+<br>
+<br>
+<br>
 
-<h2><%=@quiz.title%></h2>
+<h1><%=@quiz.title%> - Teacher Page</h1>
+
+<br>
 
 <%flash.each do |key, value| %>
   <div class="alert alert-<%= key %>"><%= value %></div>
 <% end %>
 
 
-<% @quiz.questions.each do |question|  %>
-
-<%=form_for question do |f|%>
-<%=f.hidden_field :quiz_id %>
-<h2><%=f.label :question_title %><br><%=f.text_field :question_title %></h2>
-<p><%=f.label :question_text %><br><%=f.text_field :question_text %></p>
-<%=f.submit "Edit Question"%>
-<%end%>  
 
 
-<br><br>
-<%question.answers.each do |answer| %>
-
-<%=form_for answer do |f|%>
-<%=f.hidden_field :question_id %>
-<p><%=f.label :answer_text %><br><%=f.text_field  :answer_text  %></p>
-<p><%=f.label :points%><br><%=f.text_field :points %></p>
-<p><%=f.label :correct%><br><%=f.check_box :correct%></p>
-<%=f.submit "Edit Answer"%>
-<%end%>
-
-<%end%>
-<%answer =Answer.new(question_id: question.id) %>
-<%=form_for answer do |f|%>
-<%=f.hidden_field :question_id %>
-<p><%=f.label :answer_text %><br><%=f.text_field  :answer_text  %></p>
-<p><%=f.label :points%><br><%=f.text_field :points %></p>
-<p><%=f.label :correct%><br><%=f.check_box :correct%></p>
-<%=f.submit "create Answer"%>
-<%end%>
+<% @quiz.questions.each do |question| %>
+      <% @question = question %>
+      <%= render "questions/form" %>
+<br>
+<br>
+<br>
 <%end%>
 
 
-<% question = Question.new(quiz_id: @quiz.id) %>
-<%=form_for question do |f|%>
-<%=f.hidden_field :quiz_id %>
-<p><%=f.label :question_title %><br><%=f.text_field :question_title %></p>
-<p><%=f.label :question_text %><br><%=f.text_field :question_text %></p>
-<%=f.submit "Create Question"%>
+
+<br>
+<br>
+<br>
+
+
+<% @question = Question.new(quiz_id: @quiz.id) %>
+<%= render "questions/form" %>
+
+
+
+
+
+
+<!--
+
+<div id="accordion">
+<% @quiz.questions.each do |question| %>
+  <div class="card">
+    <div class="card-header" id="#headingQuestion<%=question.id%>">
+      <h5 class="mb-0">
+        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseQuestion<%=question.id%>" aria-expanded="true" aria-controls="collapseQuestion<%=question.id%>">
+          <%= question.question_title %>
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapseQuestion<%=question.id%>" class="collapse show" aria-labelledby="#collapseQuestion<%=question.id%>" data-parent="#accordion">
+      <div class="card-body">
+      <% @question = question %>
+      <%= render "questions/form" %>
+      </div>
+    </div>
+  </div>
 <%end%>
+</div>
+
+-->
+
+
+
+
+
+
+
+
+
+
+
 
 
 <br>

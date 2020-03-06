@@ -21,12 +21,16 @@ class QuizzesController < ApplicationController
   def student_show
     @participant = @quiz.participant(current_user)
     @user = current_user
-    render 'student_show'
+    @question = @quiz.next_question(current_user)
+    if @question
+      render 'student_show'
+    else
+      render 'student_result'
+    end
   end
 
 
   def show
-
     @quiz = Quiz.find(params[:id])
 
     if @quiz.teacher?(current_user)
