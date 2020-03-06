@@ -1,9 +1,11 @@
+<br>
+<br>
+<br>
 
 <h1><%=@question.question_text%></h1>
 <br>
-<p><%=@question.question_text%></p>
+<h2><%=@question.question_text%></h2>
 
-<br>
 <br>
 
 <% result = Result.new %>
@@ -11,10 +13,10 @@
 <% result.question = @question %>
 
 <%=form_for result do |f|%>
-<%=f.collection_select :answer_id , @question.answers, :id, :answer_text%>
+<p><%=f.collection_select :answer_id , @question.answers, :id, :answer_text%></p>
 <%=f.hidden_field :participant_id%>
 <%=f.hidden_field :question_id%>
-<%=f.submit "Next"%>
+<%=f.submit 'Next', class: 'btn btn-green btn-block btn-flat'%>
 
 <%end%>
 

@@ -46,6 +46,7 @@
         <ul class="nav navbar-nav navbar-right">
           <li><a href="/quizzes">Show Quizzes</a></li>
           <%if @current_user %> 
+          <li><a href="/results">Show Results</a></li>
           <li><a href="/quizzes/new">Create Quiz</a></li>
           <li><a href="/logout">Logout</a></li>
           <li><a href="/users">Hi <%=@current_user.nick_name%>!</a></li>
