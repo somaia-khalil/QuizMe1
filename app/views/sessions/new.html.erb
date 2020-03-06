@@ -1,16 +1,3 @@
-<h1>Sign In User</h1>
-
-
-<%= form_with model: @user , url: "/login", method: :post do |f| %>
-  <%= f.label :nick_name %>
-  <%= f.text_field :nick_name %>
-  <br/>
-  <br/>
-
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-  <br/>
-  <br/>
-  <%= f.submit "Sign in" %>
-
-<% end %>
+<script>
+$('#login').modal('show');
+</script>

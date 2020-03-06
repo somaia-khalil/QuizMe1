@@ -4,9 +4,9 @@
   <div class="alert alert-<%= key %>"><%= value %></div>
 <% end %>
 
-            <p class="login-box-msg">Sign up</p>
+            <p class="login-box-msg">Login</p>
             <div class="form-group">
-              <form name="" id="signupForm" action="<%=request.base_url%>/signup" method="POST">
+              <form name="" id="loginForm" action="<%=request.base_url%>/login" method="POST">
                 <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
                 <div class="form-group has-feedback">
                   <!----- username -------------->
@@ -19,18 +19,15 @@
                   <!----- password -------------->
                   <input class="form-control" placeholder="Password" id="user[password]" name="user[password]" type="password" autocomplete="off" />
                   <span style="display:none;font-weight:bold; position:absolute;color: grey;position: absolute;padding:4px;font-size: 11px;background-color:rgba(128, 128, 128, 0.26);z-index: 17;  right: 27px; top: 5px;" id="span_loginpsw"></span>
-                  <input class="form-control" placeholder="Password confirmation" id="user[password_confirmation]" name="user[password_confirmation]" type="password" autocomplete="off" />
-                  <span style="display:none;font-weight:bold; position:absolute;color: grey;position: absolute;padding:4px;font-size: 11px;background-color:rgba(128, 128, 128, 0.26);z-index: 17;  right: 27px; top: 5px;" id="span_loginpsw"></span>
                   <!---Alredy exists  ! -->
                   <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 </div>
                 <div class="row">
                   <div class="col-xs-12">
-                    <button type="button" class="btn btn-green btn-block btn-flat" onclick="document.getElementById('signupForm').submit()">Sign up</button>
+                    <button type="button" class="btn btn-green btn-block btn-flat" onclick="document.getElementById('loginForm').submit()">Login</button>
                   </div>
                 </div>
               </form>
             </div>
 
           </div>
-

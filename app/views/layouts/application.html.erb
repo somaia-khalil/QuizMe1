@@ -17,7 +17,11 @@
   <link rel="stylesheet" type="text/css" href="<%=request.base_url%>/css/style.css">
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
+  <script src="<%=request.base_url%>/js/jquery.min.js"></script>
+  <script src="<%=request.base_url%>/js/jquery.easing.min.js"></script>
+  <script src="<%=request.base_url%>/js/bootstrap.min.js"></script>
+  <script src="<%=request.base_url%>/js/custom.js"></script>
+  <script src="<%=request.base_url%>/contactform/contactform.js"></script>
   <!-- =======================================================
     Theme Name: Mentor
     Theme URL: https://bootstrapmade.com/mentor-free-education-bootstrap-theme/
@@ -41,10 +45,10 @@
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav navbar-right">
           <li><a href="/quizzes">Show Quizzes</a></li>
-          <%if session[:nick_name] && session[:user_id] %> 
+          <%if @current_user %> 
           <li><a href="/quizzes/new">Create Quiz</a></li>
           <li><a href="/logout">Logout</a></li>
-          <li><a href="/"><p>Hi <%=session[:nick_name]%>!</p></a></li>
+          <li><a href="/users">Hi <%=@current_user.nick_name%>!</a></li>
           <%else %>
           <li><a href="#" data-target="#login" data-toggle="modal">Login</a></li>
           <li><a href="#" data-target="#signup" data-toggle="modal">Signup</a></li>
@@ -71,37 +75,8 @@
         </div>
         <div class="modal-body padtrbl">
 
-          <div class="login-box-body">
+        <%= render "users/form" %>
 
-            <p class="login-box-msg">Sign up</p>
-            <div class="form-group">
-              <form name="" id="signupForm" action="<%=request.base_url%>/signup" method="POST">
-                <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-                <div class="form-group has-feedback">
-                  <!----- username -------------->
-                  <input class="form-control" placeholder="Username" id="user[nick_name]" name="user[nick_name]" type="text" autocomplete="off" />
-                  <span style="display:none;font-weight:bold; position:absolute;color: red;position: absolute;padding:4px;font-size: 11px;background-color:rgba(128, 128, 128, 0.26);z-index: 17;  right: 27px; top: 5px;" id="span_loginid"></span>
-                  <!---Alredy exists  ! -->
-                  <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                </div>
-                <div class="form-group has-feedback">
-                  <!----- password -------------->
-                  <input class="form-control" placeholder="Password" id="user[password]" name="user[password]" type="password" autocomplete="off" />
-                  <span style="display:none;font-weight:bold; position:absolute;color: grey;position: absolute;padding:4px;font-size: 11px;background-color:rgba(128, 128, 128, 0.26);z-index: 17;  right: 27px; top: 5px;" id="span_loginpsw"></span>
-                  <input class="form-control" placeholder="Password confirmation" id="user[password_confirmation]" name="user[password_confirmation]" type="password" autocomplete="off" />
-                  <span style="display:none;font-weight:bold; position:absolute;color: grey;position: absolute;padding:4px;font-size: 11px;background-color:rgba(128, 128, 128, 0.26);z-index: 17;  right: 27px; top: 5px;" id="span_loginpsw"></span>
-                  <!---Alredy exists  ! -->
-                  <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                </div>
-                <div class="row">
-                  <div class="col-xs-12">
-                    <button type="button" class="btn btn-green btn-block btn-flat" onclick="document.getElementById('signupForm').submit()">Login</button>
-                  </div>
-                </div>
-              </form>
-            </div>
-
-          </div>
         </div>
       </div>
 
@@ -125,35 +100,8 @@
         </div>
         <div class="modal-body padtrbl">
 
-          <div class="login-box-body">
-
-            <p class="login-box-msg">Log in</p>
-            <div class="form-group">
-              <form name="" id="loginForm" action="<%=request.base_url%>/login" method="POST">
-                <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-                <div class="form-group has-feedback">
-                  <!----- username -------------->
-                  <input class="form-control" placeholder="Username" id="user[nick_name]" name="user[nick_name]" type="text" autocomplete="off" />
-                  <span style="display:none;font-weight:bold; position:absolute;color: red;position: absolute;padding:4px;font-size: 11px;background-color:rgba(128, 128, 128, 0.26);z-index: 17;  right: 27px; top: 5px;" id="span_loginid"></span>
-                  <!---Alredy exists  ! -->
-                  <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                </div>
-                <div class="form-group has-feedback">
-                  <!----- password -------------->
-                  <input class="form-control" placeholder="Password" id="user[password]" name="user[password]" type="password" autocomplete="off" />
-                  <span style="display:none;font-weight:bold; position:absolute;color: grey;position: absolute;padding:4px;font-size: 11px;background-color:rgba(128, 128, 128, 0.26);z-index: 17;  right: 27px; top: 5px;" id="span_loginpsw"></span>
-                  <!---Alredy exists  ! -->
-                  <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                </div>
-                <div class="row">
-                  <div class="col-xs-12">
-                    <button type="button" class="btn btn-green btn-block btn-flat" onclick="document.getElementById('loginForm').submit()">Login</button>
-                  </div>
-                </div>
-              </form>
-            </div>
-
-          </div>
+        <%= render "sessions/form" %>
+          
         </div>
       </div>
 
@@ -255,12 +203,6 @@
     </div>
   </footer>
   <!--/ Footer-->
-
-  <script src="<%=request.base_url%>/js/jquery.min.js"></script>
-  <script src="<%=request.base_url%>/js/jquery.easing.min.js"></script>
-  <script src="<%=request.base_url%>/js/bootstrap.min.js"></script>
-  <script src="<%=request.base_url%>/js/custom.js"></script>
-  <script src="<%=request.base_url%>/contactform/contactform.js"></script>
 
 </body>
 
